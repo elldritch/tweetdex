@@ -1,0 +1,17 @@
+{
+  "name": "Tweetdex",
+  "description": "Index and search tweets you've liked or bookmarked.",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icon.png"
+  },
+  "permissions": ["storage", "unlimitedStorage"],
+  "content_scripts": [
+    {
+      "js": ["content/content.js"],
+      "matches": ["https://twitter.com/*", "https://x.com/*"]
+    }
+  ]
+}
