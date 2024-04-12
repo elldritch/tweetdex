@@ -1,19 +1,19 @@
 # tweetdex
 
-Index and search tweets you've liked or bookmarked.
+Have you ever liked a tweet, and then been in a conversation weeks later wishing you could find that liked tweet again?
+
+Tweetdex indexes and searches tweets you've liked or bookmarked. This should be a Twitter feature, but they really don't want to build it for some reason.
+
+:construction: This project is still WIP! Most features barely work! It's only public because I wanted to get some code review from friends.
 
 ## Usage
 
-This repository contains a Chrome extension. Install it. It has two modes of operation:
+This repository contains a Chrome extension. It has two modes of operation:
 
-1. You can do one-off "indexing" of liked tweets. In this mode, it goes to your profile's liked tweets tab, and scrolls down the tab, recording tweets you've liked.
-2. By default, it passively listens for clicks on the Twitter website. When it detects that you've clicked "like" on a tweet, it indexes that tweet.
+1. You can do one-off "indexing" of previously liked or bookmarked tweets. In this mode, it goes to your profile's liked or bookmarked tweets tab, and scrolls down the tab, indexing tweets. Unfortunately, this is currently the only way to import previously liked tweets.
+2. In the background, it also passively listens for clicks on the Twitter website. When it detects that you've clicked "like" or "bookmark" on a tweet, it indexes that tweet.
 
-<!--
-
-TODO: Implement this for bookmarked tweets as well.
-
--->
+Indexed tweets have their text contents, ID, and author saved. In the future, I'd also like to save additional context (like replies, threads, and quote retweet sources), and I'd like to process media attachments (like images and videos) using AI so that they are searchable.
 
 <!--
 

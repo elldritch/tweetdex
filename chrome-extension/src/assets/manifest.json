@@ -3,15 +3,18 @@
   "description": "Index and search tweets you've liked or bookmarked.",
   "version": "0.1.0",
   "manifest_version": 3,
+  "permissions": ["storage", "unlimitedStorage"],
   "action": {
-    "default_popup": "popup/popup.html",
+    "default_popup": "popup.html",
     "default_icon": "icon.png"
   },
-  "permissions": ["storage", "unlimitedStorage"],
   "content_scripts": [
     {
-      "js": ["content/content.js"],
+      "js": ["content-script.js"],
       "matches": ["https://twitter.com/*", "https://x.com/*"]
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "service-worker.js"
+  }
 }

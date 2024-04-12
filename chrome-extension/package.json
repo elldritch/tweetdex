@@ -1,0 +1,19 @@
+{
+  "name": "tweetdex-chrome-extension",
+  "version": "0.1.0",
+  "scripts": {
+    "clean": "rm -r dist",
+    "build:dev": "DEBUG=true npm run build:compile",
+    "build:prod": "DEBUG=false npm run build:compile",
+    "build:compile": "tsc --noEmit && esbuild --bundle --sourcemap --outdir=dist --entry-names=[dir] --define:window.DEBUG=$DEBUG src/*/main.ts && cp src/assets/* dist",
+    "dev": "rg --files | entr -d npm run build:dev",
+    "fmt": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "chrome-types": "^0.1.279",
+    "esbuild": "^0.20.2",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.5"
+  }
+}
