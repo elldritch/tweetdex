@@ -1,0 +1,12 @@
+name: tweetdex
+services:
+  tweetdex-db:
+    image: postgres:16.2-bookworm
+    environment:
+      POSTGRES_USER: tweetdex
+      POSTGRES_PASSWORD: tweetdex
+      POSTGRES_DB: tweetdex
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data

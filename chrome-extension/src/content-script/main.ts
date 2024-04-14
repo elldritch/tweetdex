@@ -12,7 +12,7 @@ function main() {
         backfillTweets(message.args.tweetType);
         return false;
       case "parse-username":
-        parseUsername(reply);
+        parseUsername().then((username) => reply(username));
         return true;
       default:
         const exhaustiveCheck: never = message;

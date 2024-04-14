@@ -84,6 +84,6 @@ export async function backfillTweets(tweetType: SavedTweetType) {
   const backfillTab = await backfillTabPromise;
   log("Backfill tab ready", backfillTab);
 
-  // TODO: Index tweets in the backfill tab.
+  // Index tweets in the backfill tab.
   sendContentScriptMessageBackfillTweets(backfillTab.id!, tweetType);
 }

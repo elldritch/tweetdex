@@ -1,7 +1,7 @@
 import { log } from "../shared/log";
 import { waitForElement } from "../shared/waitForElement";
 
-export async function parseUsername(reply: Function): Promise<void> {
+export async function parseUsername(): Promise<string> {
   log("Parsing username");
 
   // Wait until the app actually loads and paints.
@@ -19,5 +19,5 @@ export async function parseUsername(reply: Function): Promise<void> {
   }
   const username = profileHref.substring(1);
   log("Parsed username", username);
-  reply(username);
+  return username;
 }

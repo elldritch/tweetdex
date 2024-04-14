@@ -42,13 +42,15 @@ function main() {
         backfillTweets("liked");
       });
 
-    document
-      .querySelector("button#index-bookmarks")!
-      .addEventListener("click", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        backfillTweets("bookmarked");
-      });
+    // TODO: Re-enable this once backend support is added.
+    //
+    // document
+    //   .querySelector("button#index-bookmarks")!
+    //   .addEventListener("click", (e) => {
+    //     e.stopPropagation();
+    //     e.preventDefault();
+    //     backfillTweets("bookmarked");
+    //   });
   });
 }
 

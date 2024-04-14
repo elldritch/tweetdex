@@ -1,27 +1,38 @@
-/*
+use axum::{routing::post, Router};
+use sqlx::postgres::PgPoolOptions;
 
-Routes:
+mod likes;
+mod users;
 
-1. Index a new public tweet
-    - Take a list of tweet IDs to index (maybe need their contents too?)
-    - Multiple users might like the same tweet, so this processing can be globally shared
-    - Kicks off a background job for parsing and loading the tweet, and handling processing of images and stuff?
-2. Index a new private tweet
-    - Take a user's handle and a list of private tweets with their contents
-    - Can't index publicly, so will need to rely on the user's extension to upload
-    - Scope private tweets to the uploading user
-3. Add a new like
-    - Take a user's handle and a list of tweet IDs that they like
-    - Associates a user to a tweet, so that tweet shows up as a search candidate
+#[tokio::main]
+async fn main() {
+    tracing_subscriber::fmt::init();
 
-For now, we'll save flat file lists:
-- A folder per tweet
-- A folder per user
+    print!("Connecting to Postgres...");
+    let pool = PgPoolOptions::new()
+        .max_connections(5)
+        .connect("postgresql://tweetdex:tweetdex@localhost:5432/tweetdex")
+        .await
+        .unwrap();
+    println!(" done!");
 
-And then we'll process this into an index later for textual and semantic search.
+    print!("Running migrations...");
+    sqlx::migrate!().run(&pool).await.unwrap();
+    println!(" done!");
 
-*/
+    print!("Setting up router...");
+    let app = Router::new()
+        .route("/likes", post(likes::handle_new_likes))
+        .route("/users", post(users::handle_new_users))
+        .with_state(pool)
+        .layer(tower_http::trace::TraceLayer::new_for_http())
+        .layer(tower_http::cors::CorsLayer::permissive());
 
-fn main() {
-    println!("Hello, world!");
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:3000")
+        .await
+        .unwrap();
+    println!(" done!");
+
+    println!("Listening on 127.0.0.1:3000");
+    axum::serve(listener, app).await.unwrap()
 }
